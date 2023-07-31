@@ -1,10 +1,12 @@
+import { useState } from 'react';
+
 const Home = () => {
 
     const handleClick = () => {
         console.log("Hello");
     }
-    const handleClickAgain = (name) => {
-        console.log("Hello " + name);
+    const handleClickAgain = (name, event) => {
+        console.log("Hello " + name, event.target);
     }
     return ( 
         <div className="home">
