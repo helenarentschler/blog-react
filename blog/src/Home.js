@@ -2,18 +2,21 @@ import { useState } from 'react';
 
 const Home = () => {
 
+    // useState hook retorna array
+    // name é uma variavel reativa
+    const [name, setName] = useState('Helena');
+    const [age, setAge] = useState(20);
+
     const handleClick = () => {
-        console.log("Hello");
+        setName('Sandro');
+        setAge(30);
     }
-    const handleClickAgain = (name, event) => {
-        console.log("Hello " + name, event.target);
-    }
+   
     return ( 
         <div className="home">
             <h2>Homepage</h2>
+            <p>{ name } is { age }</p>
             <button onClick={handleClick}> Click me </button>
-            {/* funçao anonima receb o evento e passa passa a funçao interna */}
-            <button onClick={(event) => handleClickAgain("Helena", event)}> Click Again </button>
         </div>
      );
 }
