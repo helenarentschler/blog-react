@@ -3,29 +3,23 @@ import BlogList from './BlogList';
 
 const Home = () => {
 
-    const [blogs, setBlog] = useState([
-        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
-        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
-        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
-    ]);
+    const [blogs, setBlog] = useState(null);
 
-    const [name, setName] = useState("mario");
-   
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter((blog) => blog.id !== id);
-        setBlog(newBlogs);
-    }
-
-    // loads every time the state changes (re-render)
     useEffect(() => {
-        console.log("use effect ran");
-        console.log(name);
-    }, [name]);
-    //is there's dependency, only if dependency changes 
+        fetch("http://localhost:8000/blogs")
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                console.log(data);
+                setBlog(data);
+            }) 
+    }, []);
+
     return ( 
         <div className="home">
-            <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete}/>
-            <button onClick={() => (setName("helena"))}>change name</button>
+            {/* conditional template */}
+            { blogs && <BlogList blogs={blogs} title="All Blogs"/>}
         </div>
      );
 }
